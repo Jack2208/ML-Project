@@ -4,7 +4,8 @@
 This project aims to develop a machine learning model to classify passwords based on their strength. 
 
 ## Dataset
-The dataset used for this analysis contains 670k passwords and it's found at the link: https://www.kaggle.com/datasets/bhavikbb/password-strength-classifier-dataset?resource=download and it's derived from the 000webhost leak and has been labeled using various commercial password strength meters, combined in the tool PARS developed by Georgia Tech.
+The dataset used for this analysis contains 670k passwords and it's found at the link: https://www.kaggle.com/datasets/bhavikbb/password-strength-classifier-dataset?resource=download
+It's derived from the 000webhost leak and has been labeled using various commercial password strength meters, combined in the tool PARS developed by Georgia Tech.
 
 ## Model
 The final model used is a RandomForestClassifier. Additional models experimented with include Logistic Regression and other ensemble methods. Hyperparameter tuning was performed using GridSearchCV.
