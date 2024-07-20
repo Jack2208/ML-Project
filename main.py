@@ -89,3 +89,53 @@ plt.title('Logistic Regression Confusion Matrix')
 plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
+
+from sklearn.svm import LinearSVC
+
+# Modello Linear SVM
+linear_svm_model = LinearSVC()
+linear_svm_model.fit(x_train, y_train)
+linear_svm_pred = linear_svm_model.predict(x_test)
+
+linear_svm_model.score(x_test, y_test)
+
+print(classification_report(y_test, linear_svm_pred))
+
+
+# Fuction to track the hinge loss of SGD
+from sklearn.metrics import hinge_loss
+
+def track_hinge_loss(X_train, y_train, X_test, y_test, max_iter=1000, tol=1e-3):
+    model = SGDClassifier(loss='hinge', max_iter=1, warm_start=True, tol=tol, random_state=0)
+    loss_history = []
+    for i in range(max_iter):
+        model.fit(X_train, y_train)  # Fit one iteration
+        y_pred_prob = model.predict_proba(X_test)  # Get predicted probabilities
+        loss = hinge_loss(y_test, y_pred_prob)  # Compute hinge loss
+        loss_history.append(loss)
+        if len(loss_history) > 1 and abs(loss_history[-1] - loss_history[-2]) < tol:
+            break
+    return loss_history
+     
+
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import SGDClassifier
+import matplotlib.pyplot as plt
+
+
+model = SGDClassifier() # stochastic gradient descent, it processes mini-batches of data, making it suitable for datasets that do not fit into memory.
+model.fit(x_train, y_train)
+y_pred = model.predict(x_test)
+
+print(classification_report(y_test, y_pred))
+
+logistic_loss_values = track_logistic_loss( x_train, y_train, x_test, y_test)
+
+plt.figure(figsize=(12, 6))
+plt.plot(logistic_loss_values, label='Logistic Regression Loss', color='blue')
+plt.xlabel('Iterations')
+plt.ylabel('Loss')
+plt.title('Training Loss Over Iterations')
+plt.legend()
+plt.grid(True)
+plt.show()
